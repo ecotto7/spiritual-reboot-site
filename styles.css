@@ -1,0 +1,303 @@
+/* Spiritual Reboot — palette pulled from the channel banner:
+   stone-dark teal walls, candle amber, parchment light. */
+:root {
+  --stone: #14232a;        /* page background, the dark of the chapel wall */
+  --stone-deep: #0e191e;   /* footer, form fields */
+  --wall: #2c4a4f;         /* rules, borders, teal from the banner */
+  --parchment: #ede3d1;    /* primary text */
+  --mist: #a8b5b1;         /* secondary text */
+  --candle: #e3a24a;       /* primary accent, candle flame */
+  --ember: #b8612a;        /* hover / deep accent */
+
+  --measure: 38rem;
+  --serif: "Spectral", Georgia, "Times New Roman", serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  margin: 0;
+  background: var(--stone);
+  color: var(--parchment);
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: 1.1875rem;   /* 19px */
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+
+a {
+  color: var(--candle);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+a:hover { color: var(--parchment); }
+
+:focus-visible {
+  outline: 2px solid var(--candle);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+h1, h2 {
+  font-weight: 400;
+  line-height: 1.15;
+  margin: 0 0 0.75em;
+  letter-spacing: -0.01em;
+}
+h2 { font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.375rem); }
+
+p { margin: 0 0 1.1em; }
+
+.prose {
+  max-width: var(--measure);
+}
+
+/* ---------- Hero: the banner is the memorable thing ---------- */
+.hero {
+  position: relative;
+  min-height: 92vh;
+  min-height: 92svh;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 1rem 4.5rem;
+  background-color: var(--stone);
+  background-image:
+    linear-gradient(to top, var(--stone) 0%, rgba(20, 35, 42, 0.82) 30%, rgba(20, 35, 42, 0.15) 65%, rgba(20, 35, 42, 0.35) 100%),
+    url("images/banner.jpg");
+  background-size: cover;
+  background-position: 30% center;
+  overflow: hidden;
+}
+
+/* A soft candle glow that breathes once in a while over the candles in the banner */
+.hero-glow {
+  position: absolute;
+  left: 18%;
+  top: 48%;
+  width: 46vmax;
+  height: 46vmax;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(227, 162, 74, 0.28) 0%, rgba(227, 162, 74, 0.08) 35%, transparent 65%);
+  pointer-events: none;
+  animation: candle 7s ease-in-out infinite;
+}
+@keyframes candle {
+  0%, 100% { opacity: 0.75; }
+  40%      { opacity: 1; }
+  55%      { opacity: 0.85; }
+  70%      { opacity: 0.95; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-glow { animation: none; }
+}
+
+.hero-inner {
+  position: relative;
+  width: 100%;
+  max-width: 68rem;
+  margin: 0 auto;
+}
+.hero h1 {
+  font-size: clamp(3rem, 1.6rem + 6.5vw, 6.5rem);
+  font-weight: 300;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  margin-bottom: 0.3em;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.45);
+}
+.hero-lede {
+  max-width: 30rem;
+  font-size: clamp(1.15rem, 1rem + 0.6vw, 1.4rem);
+  font-style: italic;
+  color: var(--parchment);
+  margin-bottom: 2rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  align-items: center;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-block;
+  font-family: var(--serif);
+  font-size: 1.0625rem;
+  font-weight: 400;
+  text-decoration: none;
+  cursor: pointer;
+  border: 0;
+}
+.btn-primary {
+  background: var(--candle);
+  color: var(--stone-deep);
+  padding: 0.7em 1.4em;
+  border-radius: 999px;
+  transition: background-color 0.2s ease;
+}
+.btn-primary:hover { background: var(--parchment); color: var(--stone-deep); }
+.btn-quiet {
+  color: var(--parchment);
+  text-decoration: underline;
+  text-decoration-color: var(--candle);
+  text-underline-offset: 0.3em;
+  padding: 0.7em 0;
+}
+.btn-quiet:hover { color: var(--candle); }
+
+/* ---------- Sections ---------- */
+main > section {
+  padding: 5rem 1rem;
+}
+main > section > * {
+  margin-left: auto;
+  margin-right: auto;
+}
+main > section + section {
+  border-top: 1px solid var(--wall);
+}
+
+/* About */
+.about-grid {
+  max-width: 60rem;
+  display: grid;
+  grid-template-columns: 15rem 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+.portrait {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px var(--wall), 0 0 60px rgba(227, 162, 74, 0.18);
+}
+.welcome {
+  font-style: italic;
+  color: var(--candle);
+  margin-top: 1.5em;
+}
+
+/* Offerings */
+.offering-list { margin: 0; }
+.offering {
+  padding: 1.25rem 0 1.25rem 1.25rem;
+  border-left: 2px solid var(--wall);
+  margin-bottom: 1rem;
+}
+.offering dt {
+  font-weight: 600;
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
+}
+.offering dd {
+  margin: 0;
+  color: var(--mist);
+}
+.soon {
+  color: var(--candle);
+  font-style: italic;
+}
+
+/* Latest videos */
+.latest-inner { max-width: 52rem; }
+.video-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: var(--stone-deep);
+  border: 1px solid var(--wall);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.video-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.latest-more { margin-top: 1.25rem; }
+
+/* Prayer form */
+.pray { background: linear-gradient(to bottom, var(--stone), #172a30); }
+.form { margin-top: 2rem; }
+.field { margin-bottom: 1.4rem; }
+.field label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-weight: 400;
+}
+.optional { color: var(--mist); font-style: italic; font-weight: 300; }
+.field input,
+.field textarea {
+  width: 100%;
+  font: inherit;
+  font-size: 1.0625rem;
+  color: var(--parchment);
+  background: var(--stone-deep);
+  border: 1px solid var(--wall);
+  border-radius: 6px;
+  padding: 0.7em 0.85em;
+}
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--candle);
+  box-shadow: 0 0 0 3px rgba(227, 162, 74, 0.25);
+}
+.field textarea { resize: vertical; min-height: 9rem; }
+.hidden-field { position: absolute; left: -9999px; }
+.alt-contact { margin-top: 2rem; color: var(--mist); font-size: 1rem; }
+
+/* Footer */
+.footer {
+  background: var(--stone-deep);
+  border-top: 1px solid var(--wall);
+  padding: 3.5rem 1rem 2.5rem;
+  text-align: center;
+}
+.blessing {
+  font-style: italic;
+  font-size: 1.375rem;
+  color: var(--candle);
+  margin-bottom: 1.25rem;
+}
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.75rem;
+  margin-bottom: 1.5rem;
+}
+.footer-links a { color: var(--parchment); }
+.footer-links a:hover { color: var(--candle); }
+.copyright { color: var(--mist); font-size: 0.875rem; margin: 0; }
+
+/* Thank-you page */
+.thanks {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+.thanks .prose { margin: 0 auto; }
+.thanks h1 { font-size: clamp(2.25rem, 1.6rem + 3vw, 3.5rem); font-weight: 300; }
+
+/* ---------- Small screens ---------- */
+@media (max-width: 720px) {
+  body { font-size: 1.0625rem; }
+  .hero { padding-bottom: 3rem; background-position: 22% center; }
+  .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .portrait { max-width: 11rem; }
+  main > section { padding: 3.5rem 1rem; }
+}
